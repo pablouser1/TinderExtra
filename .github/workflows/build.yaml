@@ -24,10 +24,10 @@ jobs:
     - name: Build script
       run: yarn build
     - name: Create Release
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "dist/TinderExtra.user.js"
-          artifactContentType: text/javascript
-          token: ${{ secrets.GITHUB_TOKEN }}
-          tag: v${{ steps.package-version.outputs.current-version }}
-          allowUpdates: true
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: "dist/TinderExtra.user.js"
+        artifactContentType: text/javascript
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag: v${{ steps.package-version.outputs.current-version }}
+        allowUpdates: true
