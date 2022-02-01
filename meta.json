@@ -1,0 +1,7 @@
+{
+    "namespace": "Violentmonkey Scripts",
+    "match": [
+        "https://tinder.com/app/*"
+    ],
+    "run-at": "document-end"
+}
