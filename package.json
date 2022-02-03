@@ -7,8 +7,8 @@
   "author": "Pablo Ferreiro",
   "private": true,
   "scripts": {
-    "build": "rollup --config --environment APP_MODE=production",
-    "dev": "rollup --config -w --environment APP_MODE=development"
+    "build": "rollup --config --environment APP_MODE:production",
+    "dev": "rollup --config -w --environment APP_MODE:development"
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^8.3.0",

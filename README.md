@@ -21,3 +21,6 @@ yarn build
 
 ## TODO
 * Allow rewind from swipes
+
+## Credits
+* [GM_Config](https://github.com/sizzlemctwizzle/GM_config) | [LICENSE](https://github.com/sizzlemctwizzle/GM_config/blob/master/LICENSE)

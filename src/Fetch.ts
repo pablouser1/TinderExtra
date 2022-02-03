@@ -1,14 +1,17 @@
 import Helpers from './Helpers'
 
 export default class FetchRewriter {
-    path = ''
-    bypass = [
+    private bypass = [
         {
             'endpoint': '/pass',
-            'action': this.mockPass
+            'action': this.mockReq
+        },
+        {
+            'endpoint': '/v2/batch/event',
+            'action': this.mockReq
         }
     ]
-    before = [
+    private before = [
         {
             'endpoint': '/v2/fast-match/teasers',
             'action': this.unblurLikes
@@ -16,7 +19,7 @@ export default class FetchRewriter {
     ]
 
     pass(input: RequestInfo) {
-        const path = this.getPath(input.toString())
+        const path = Helpers.getPath(input.toString())
         const index = this.bypass.findIndex(item => path.includes(item.endpoint))
         if (index !== -1) {
             return this.bypass[index].action(input)
@@ -25,7 +28,7 @@ export default class FetchRewriter {
     }
 
     mod (input: RequestInfo, init: RequestInit | undefined) {
-        const path = this.getPath(input.toString())
+        const path = Helpers.getPath(input.toString())
         const index = this.before.findIndex(item => path.includes(item.endpoint))
         if (index !== -1) {
             this.before[index].action(init)
@@ -43,8 +46,12 @@ export default class FetchRewriter {
         }
     }
 
-    mockPass(input: RequestInfo): Response {
-        Helpers.log('Bypassing pass request')
+    // -- Bypass -- //
+    /**
+     * Skips request and mocks response
+     */
+    mockReq(input: RequestInfo): Response {
+        Helpers.log(`Bypassing request from ${input.toString()}`)
         return {
             headers: {} as Headers,
             ok: true,
@@ -74,12 +81,5 @@ export default class FetchRewriter {
                 throw new Error('Function not implemented.')
             }
         }
-    }
-
-    // -- Helpers -- //
-    getPath(url_str: string) {
-        const url = new URL(url_str)
-        const path = url.pathname
-        return path
     }
 }

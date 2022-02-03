@@ -18,11 +18,11 @@ const plugins = [
   typescript()
 ]
 
-if (process.env.MODE === 'development') {
+if (process.env.APP_MODE === 'development') {
   plugins.push(serve({
     contentBase: ['dist'],
     headers: {
-      'Cache-Control': 'public, max-age=10'
+      'Cache-Control': 'public, max-age=5'
     }
   }))
 }
